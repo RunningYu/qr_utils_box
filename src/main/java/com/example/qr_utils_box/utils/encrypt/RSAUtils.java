@@ -1,5 +1,6 @@
 package com.example.qr_utils_box.utils.encrypt;
 
+import com.example.qr_utils_box.dto.EncryptKeyDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -14,28 +15,28 @@ public class RSAUtils {
     /**
      * 加密方法
      */
-    public static String encrypt(String data, String publicKey) {
+    public static String encrypt(String data, EncryptKeyDto keyDto) {
         return "";
     }
 
     /**
      * 解密方法
      */
-    public static String decrypt(String data, String privateKey) {
+    public static String decrypt(String data, EncryptKeyDto keyDto) {
         return "";
     }
 
     /**
      * 签名
      */
-    public static String sign(String data, String privateKey) {
+    public static String sign(String data, EncryptKeyDto keyDto) {
         return "";
     }
 
     /**
      * 验签
      */
-    public static boolean verify(String data, String publicKey, String sign) {
+    public static boolean verify(String data, EncryptKeyDto keyDto, String sign) {
         return false;
     }
 

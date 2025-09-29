@@ -18,7 +18,7 @@ public class EncryptedRequest {
     /**
      * 使用密钥加密后的业务数据
      */
-    private String encryptedContent;
+    private String encryptedData;
 
     /**
      * 时间戳
