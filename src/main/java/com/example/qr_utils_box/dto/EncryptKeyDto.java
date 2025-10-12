@@ -2,6 +2,8 @@ package com.example.qr_utils_box.dto;
 
 import lombok.Data;
 
+import java.security.PublicKey;
+
 /**
  * 客户端和服务端两套RSA公私钥，分别用于AES密钥加解密、签名
  * @author : 其然乐衣Letitbe
@@ -14,7 +16,7 @@ public class EncryptKeyDto {
     /**
      * 客户端私钥（对参数签名，得到sign）
      */
-    private String clientPublicKey;
+    private PublicKey clientPublicKey;
 
     /**
      * 客户端公钥（校验签名sign）
