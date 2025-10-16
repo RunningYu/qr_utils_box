@@ -1,8 +1,13 @@
 package com.example.qr_utils_box.utils.encrypt;
 
+import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 /**
  * @author : 其然乐衣Letitbe
@@ -31,4 +36,47 @@ public class AESUtils {
         }
         return null;
     }
+
+    /**
+     * AES加密数据
+     * @param data 待加密数据
+     * @param aesKey AES密钥
+     * @return 加密后数据
+     */
+    public static String encrypt(String data, String aesKey) {
+        try {
+            Cipher cipher = Cipher.getInstance(AES_ALGORITHM);
+            IvParameterSpec iv = new IvParameterSpec(new byte[16]);
+            byte[] keyBytes = Base64.getDecoder().decode(aesKey);
+            SecretKeySpec sKeySpec = new SecretKeySpec(keyBytes, "AES");
+            cipher.init(Cipher.ENCRYPT_MODE, sKeySpec, iv);
+            byte[] encryptedData = cipher.doFinal(data.getBytes(StandardCharsets.UTF_8));
+            return Base64.getEncoder().encodeToString(encryptedData);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * AES解密数据
+     * @param encryptedData 待解密数据
+     * @param aesKey AES密钥
+     * @return 解密后数据
+     */
+    public static String decrypt(String encryptedData, String aesKey) {
+        try {
+            Cipher cipher = Cipher.getInstance(AES_ALGORITHM);
+            IvParameterSpec iv = new IvParameterSpec(new byte[16]);
+            byte[] keyBytes = Base64.getDecoder().decode(aesKey);
+            SecretKeySpec sKeySpec = new SecretKeySpec(keyBytes, "AES");
+            cipher.init(Cipher.DECRYPT_MODE, sKeySpec, iv);
+            byte[] decryptedData = cipher.doFinal(Base64.getDecoder().decode(encryptedData));
+            return new String(decryptedData, StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

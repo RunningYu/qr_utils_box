@@ -11,7 +11,7 @@ import java.security.NoSuchAlgorithmException;
  * @author : 其然乐衣Letitbe
  * @date : 2025/10/12
  */
-public class RasAesMixedUtils {
+public class RsaAesMixedUtils {
     /**
      * 加密方法
      */
