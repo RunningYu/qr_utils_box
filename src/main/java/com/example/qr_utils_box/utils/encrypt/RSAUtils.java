@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
-import java.util.Base64;
+import java.util.*;
 
 /**
  * @author : 其然乐衣Letitbe
@@ -128,7 +128,7 @@ public class RSAUtils {
     /**
      * RAS公钥 验名
      */
-    public static boolean verify(String data, String sign, String publicKeyStr) throws Exception {
+    public static boolean verifySign(String data, String sign, String publicKeyStr) throws Exception {
         try {
             PublicKey pubKey = getPublicKeyFromX509("RSA", publicKeyStr);
             Signature signature = Signature.getInstance("SHA256WithRSA");
@@ -150,6 +150,40 @@ public class RSAUtils {
         KeyFactory keyFactory = KeyFactory.getInstance(algorithm);
         byte[] key = Base64.getDecoder().decode(encodedKey);
         return keyFactory.generatePrivate(new PKCS8EncodedKeySpec(key));
+    }
+
+    /**
+     * 对参数排序
+     */
+    public static String sortParams(Map<String, Object> params, String salt) {
+        List<String> keys = new ArrayList<>(params.keySet());
+        Collections.sort(keys);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < keys.size(); i++) {
+            String key = keys.get(i);
+            Object value = params.get(key);
+            if (isNotEmpty(value)) {
+                sb.append((i == 0 ? "" : "&") + key + "=" + value);
+            }
+        }
+        // 加盐
+        if (Strings.isNotBlank(salt)) {
+            sb.append("&key" + salt);
+        }
+        return sb.toString();
+    }
+
+    public static boolean isNotEmpty(Object value) {
+        if (value == null) {
+            return false;
+        }
+        if (value instanceof String) {
+            return !Strings.isBlank((String) value);
+        }
+        if (value instanceof Collection) {
+            return !((Collection<?>) value).isEmpty();
+        }
+        return true;
     }
 
 }

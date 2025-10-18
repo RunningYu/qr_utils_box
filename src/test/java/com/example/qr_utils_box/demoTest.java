@@ -133,7 +133,7 @@
 //        rp.setBizContent(encryptedBizContent);
 //
 //        //使用合作伙伴RSA公钥加密AES secretKey
-//        String randomKey = rsaEncryptByPublic(partnerPublicKey, aesEncryptKey);
+//        String randomKey = rsaEncryptByPublic(partnerPublicKey, aesEnc ryptKey);
 //        rp.setRandomKey(randomKey);
 //
 //        Map<String, Object> requestMap = JSONObject.parseObject(JSON.toJSONString(rp)).getInnerMap();
@@ -331,6 +331,8 @@
 //        }
 //        return content.toString();
 //    }
+//
+//
 //
 //    static class RequestProtocol {
 //        private String appId;

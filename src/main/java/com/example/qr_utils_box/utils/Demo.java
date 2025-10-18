@@ -5,4 +5,7 @@ package com.example.qr_utils_box.utils;
  * @date : 2025/9/26
  */
 public class Demo {
+
+
+
 }

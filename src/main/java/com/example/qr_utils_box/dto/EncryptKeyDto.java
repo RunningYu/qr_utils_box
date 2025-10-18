@@ -16,7 +16,7 @@ public class EncryptKeyDto {
     /**
      * 客户端私钥（对参数签名，得到sign）
      */
-    private PublicKey clientPublicKey;
+    private String clientPublicKey;
 
     /**
      * 客户端公钥（校验签名sign）
